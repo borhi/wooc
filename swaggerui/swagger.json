@@ -1,0 +1,113 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "WOOC API"
+  },
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/ip": {
+      "post": {
+        "security": [{"Bearer": []}],
+        "tags": [
+          "Ip"
+        ],
+        "description": "Create Ip",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Ip"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Ip"
+            }
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "security": [{"Bearer": []}],
+        "tags": [
+          "Ip"
+        ],
+        "description": "Get Ips",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ip"
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "500": {
+            "description": "InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Ip": {
+      "type": "object",
+      "properties": {
+        "ip_address": {
+          "type": "string"
+        },
+        "ASN": {
+          "type": "integer"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
